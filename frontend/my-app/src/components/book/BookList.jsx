@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Book from "./Book";
 import { getAllBooks, deleteBook } from "../../service/bookService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BookList = () => {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     async function loadBooks() {
         try {
@@ -62,8 +63,8 @@ const BookList = () => {
                                 <td>{b.author.fullName}</td>
                                 <td>{b.publisher.name}</td>
                                 <td>
-                                    <button className="edit">Izmeni</button>
-                                    <button className="delete">Obriši</button>
+                                    <button className="edit" onClick={() => navigate(`/books/${b.id}/edit`)}>Izmeni</button>
+                                    <button className="delete" onClick={() => handleDelete(b.id)} style={{ marginLeft: "10px" }}>Obriši</button>
                                 </td>
                             </tr>
                         ))}
