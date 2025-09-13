@@ -39,19 +39,6 @@ const EditBookForm = () => {
         loadData();
     }, [id, setValue]);
 
-    // const onSubmit = async (data) => {
-    //     try {
-    //         await updateBook(id, {
-    //             ...data,
-    //             pageCount: Number(data.pageCount),
-    //             publisherId: Number(data.publisherId),
-    //             authorId: Number(data.authorId),
-    //         });
-    //         navigate("/books");
-    //     } catch {
-    //         alert("Greška pri izmeni knjige.");
-    //     }
-    // };
 
     const onSubmit = async (data) => {
         try {
@@ -107,9 +94,9 @@ const EditBookForm = () => {
                 Izdavač:
                 <select {...register("publisherId", { required: "Odaberite izdavača" })}>
                     <option value="">-- Odaberite izdavača --</option>
-                    {publishers.map((p) => (
-                        <option key={p.id} value={p.id}>
-                            {p.name}
+                    {publishers.map((publisher) => (
+                        <option key={publisher.id} value={publisher.id}>
+                            {publisher.name}
                         </option>
                     ))}
                 </select>
@@ -123,9 +110,9 @@ const EditBookForm = () => {
                 Autor:
                 <select {...register("authorId", { required: "Odaberite autora" })}>
                     <option value="">-- Odaberite autora --</option>
-                    {authors.map((a) => (
-                        <option key={a.id} value={a.id}>
-                            {a.fullName}
+                    {authors.map((author) => (
+                        <option key={author.id} value={author.id}>
+                            {author.fullName}
                         </option>
                     ))}
                 </select>
