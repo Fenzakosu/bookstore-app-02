@@ -39,19 +39,38 @@ const EditBookForm = () => {
         loadData();
     }, [id, setValue]);
 
+    // const onSubmit = async (data) => {
+    //     try {
+    //         await updateBook(id, {
+    //             ...data,
+    //             pageCount: Number(data.pageCount),
+    //             publisherId: Number(data.publisherId),
+    //             authorId: Number(data.authorId),
+    //         });
+    //         navigate("/books");
+    //     } catch {
+    //         alert("Greška pri izmeni knjige.");
+    //     }
+    // };
+
     const onSubmit = async (data) => {
         try {
-            await updateBook(id, {
-                ...data,
-                pageCount: Number(data.pageCount),
-                publisherId: Number(data.publisherId),
-                authorId: Number(data.authorId),
-            });
+            const bookData = {
+                title: data.title,
+                pageCount: data.pageCount ? Number(data.pageCount) : 0,
+                isbn: data.isbn,
+                publishedDate: data.publishedDate ? new Date(data.publishedDate).toISOString() : null,
+                authorId: data.authorId ? Number(data.authorId) : null,
+                publisherId: data.publisherId ? Number(data.publisherId) : null
+            };
+            await updateBook(id, bookData);
             navigate("/books");
-        } catch {
-            alert("Greška pri izmeni knjige.");
+        } catch (err) {
+            console.error('Error updating book:', err);
+            alert(`Greška pri izmeni knjige: ${err.response?.data?.message || err.message}`);
         }
     };
+
 
     if (loading) return <p>Učitavanje...</p>;
 

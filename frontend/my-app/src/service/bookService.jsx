@@ -18,7 +18,9 @@ export async function createBook(bookData) {
 }
 
 export async function updateBook(id, bookData) {
-    const response = await AxiosConfig.put(`${RESOURCE}/${id}`, bookData);
+    // The book object must include the ID to match the URL parameter
+    const bookWithId = { ...bookData, id: parseInt(id) };
+    const response = await AxiosConfig.put(`${RESOURCE}/${id}`, bookWithId);
     return response.data;
 }
 
