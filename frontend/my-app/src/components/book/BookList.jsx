@@ -34,33 +34,62 @@ const BookList = () => {
         }
     };
 
-    if (loading) return <p>Učitavanje knjiga...</p>;
+    if (loading) {
+        return (
+            <div>
+                <div className="book-list-header">
+                    <h1>Knjige</h1>
+                </div>
+                <div className="loading-state">
+                    Učitavanje knjiga...
+                </div>
+            </div>
+        );
+    }
 
-    if (error) return <p style={{ color: "red" }}>{error}</p>;
+    if (error) {
+        return (
+            <div>
+                <div className="book-list-header">
+                    <h1>Knjige</h1>
+                </div>
+                <div className="error-state">
+                    {error}
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div>
-            <h1>Knjige</h1>
-            <Link to="/books/new">
-                <button>Dodaj novu knjigu</button>
-            </Link>
-
-            <div>
-                {books.map(book => (
-                    <Book
-                        key={book.id}
-                        id={book.id}
-                        title={book.title}
-                        pageCount={book.pageCount}
-                        publishedDate={book.publishedDate}
-                        isbn={book.isbn}
-                        author={book.author.fullName}
-                        publisher={book.publisher.name}
-                        onDelete={handleDelete}
-                    />
-                ))}
+            <div className="book-list-header">
+                <h1>Knjige</h1>
+                <Link to="/books/new" className="add-book-btn">
+                    Dodaj novu knjigu
+                </Link>
             </div>
 
+            {books.length === 0 ? (
+                <div className="empty-state">
+                    <p>Nema dostupnih knjiga. Dodajte prvu!</p>
+                </div>
+            ) : (
+                <div className="book-grid">
+                    {books.map(book => (
+                        <Book
+                            key={book.id}
+                            id={book.id}
+                            title={book.title}
+                            pageCount={book.pageCount}
+                            publishedDate={book.publishedDate}
+                            isbn={book.isbn}
+                            author={book.author.fullName}
+                            publisher={book.publisher.name}
+                            onDelete={handleDelete}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

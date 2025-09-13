@@ -2,10 +2,89 @@
 @import 'mixins';
 @import 'form';
 @import 'table';
+@import 'book-card';
 
 body {
     font-family: $font-stack;
-    background: $secondary-color;
+    background: linear-gradient(135deg, $secondary-color 0%, lighten($secondary-color, 2%) 100%);
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    line-height: 1.6;
 }
+
+// Main container styling
+main {
+    min-height: 80vh;
+    padding: $spacing-xl;
+    background: transparent;
+    
+    @include mobile {
+        padding: $spacing-lg;
+    }
+}
+
+// Global heading styles
+h1, h2, h3, h4, h5, h6 {
+    color: $primary-color;
+    font-weight: 600;
+    margin-bottom: $spacing-lg;
+}
+
+h1 {
+    font-size: $font-size-xxl * 1.8;
+    
+    @include mobile {
+        font-size: $font-size-xxl * 1.4;
+    }
+}
+
+h2 {
+    font-size: $font-size-xxl * 1.3;
+    
+    @include mobile {
+        font-size: $font-size-xl;
+    }
+}
+
+// Link styles
+a {
+    color: $primary-color;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        color: $accent-color;
+        text-decoration: underline;
+    }
+}
+
+// Global button resets
+button {
+    font-family: $font-stack;
+}
+
+// Utility classes
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    
+    @include mobile {
+        padding: 0 $spacing-md;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: $spacing-sm; }
+.mt-2 { margin-top: $spacing-md; }
+.mt-3 { margin-top: $spacing-lg; }
+.mt-4 { margin-top: $spacing-xl; }
+
+.mb-1 { margin-bottom: $spacing-sm; }
+.mb-2 { margin-bottom: $spacing-md; }
+.mb-3 { margin-bottom: $spacing-lg; }
+.mb-4 { margin-bottom: $spacing-xl; }

@@ -15,7 +15,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main style={{ minHeight: "80vh", padding: "20px" }}>
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

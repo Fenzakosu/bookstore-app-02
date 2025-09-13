@@ -65,62 +65,71 @@ const EditBookForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
             <h2>Izmeni knjigu</h2>
 
-            <label>
+            <label htmlFor="title">
                 Naslov:
-                <input {...register("title", { required: "Obavezno polje" })} />
             </label>
-            {errors.title && <p style={{ color: "red" }}>{errors.title.message}</p>}
-            <br />
+            <input 
+                id="title"
+                placeholder="Unesite naslov knjige"
+                {...register("title", { required: "Obavezno polje" })} 
+            />
+            {errors.title && <p>{errors.title.message}</p>}
 
-            <label>
+            <label htmlFor="pageCount">
                 Broj strana:
-                <input type="number" {...register("pageCount", { min: 1 })} />
             </label>
-            <br />
+            <input 
+                id="pageCount"
+                type="number" 
+                placeholder="npr. 300"
+                {...register("pageCount", { min: 1 })} 
+            />
+            {errors.pageCount && <p>Broj strana mora biti veći od 0</p>}
 
-            <label>
+            <label htmlFor="isbn">
                 ISBN:
-                <input {...register("isbn", { required: "Obavezno polje" })} />
             </label>
-            <br />
+            <input 
+                id="isbn"
+                placeholder="npr. 978-0-123456-78-9"
+                {...register("isbn", { required: "Obavezno polje" })} 
+            />
+            {errors.isbn && <p>{errors.isbn.message}</p>}
 
-            <label>
+            <label htmlFor="publishedDate">
                 Datum objavljivanja:
-                <input type="date" {...register("publishedDate")} />
             </label>
-            <br />
+            <input 
+                id="publishedDate"
+                type="date" 
+                {...register("publishedDate")} 
+            />
 
-            <label>
+            <label htmlFor="publisherId">
                 Izdavač:
-                <select {...register("publisherId", { required: "Odaberite izdavača" })}>
-                    <option value="">-- Odaberite izdavača --</option>
-                    {publishers.map((publisher) => (
-                        <option key={publisher.id} value={publisher.id}>
-                            {publisher.name}
-                        </option>
-                    ))}
-                </select>
             </label>
-            {errors.publisherId && (
-                <p style={{ color: "red" }}>{errors.publisherId.message}</p>
-            )}
-            <br />
+            <select id="publisherId" {...register("publisherId", { required: "Odaberite izdavača" })}>
+                <option value="">-- Odaberite izdavača --</option>
+                {publishers.map((p) => (
+                    <option key={p.id} value={p.id}>
+                        {p.name}
+                    </option>
+                ))}
+            </select>
+            {errors.publisherId && <p>{errors.publisherId.message}</p>}
 
-            <label>
+            <label htmlFor="authorId">
                 Autor:
-                <select {...register("authorId", { required: "Odaberite autora" })}>
-                    <option value="">-- Odaberite autora --</option>
-                    {authors.map((author) => (
-                        <option key={author.id} value={author.id}>
-                            {author.fullName}
-                        </option>
-                    ))}
-                </select>
             </label>
-            {errors.authorId && (
-                <p style={{ color: "red" }}>{errors.authorId.message}</p>
-            )}
-            <br />
+            <select id="authorId" {...register("authorId", { required: "Odaberite autora" })}>
+                <option value="">-- Odaberite autora --</option>
+                {authors.map((a) => (
+                    <option key={a.id} value={a.id}>
+                        {a.fullName}
+                    </option>
+                ))}
+            </select>
+            {errors.authorId && <p>{errors.authorId.message}</p>}
 
             <button type="submit">Sačuvaj izmene</button>
         </form>

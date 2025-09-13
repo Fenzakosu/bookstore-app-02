@@ -1,0 +1,131 @@
+// Responsive breakpoints
+@mixin mobile {
+  @media (max-width: #{$mobile - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$mobile}) and (max-width: #{$tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: #{$large-desktop}) {
+    @content;
+  }
+}
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Button styles
+@mixin button-base {
+  border: none;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  font-family: $font-stack;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-base;
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: $gradient-primary;
+  color: $white;
+  box-shadow: $shadow-sm;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-hover;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin button-success {
+  @include button-base;
+  background: $gradient-success;
+  color: $white;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+@mixin button-danger {
+  @include button-base;
+  background: $gradient-accent;
+  color: $white;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Card styles
+@mixin card {
+  background: $white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-xl;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+// Grid system
+@mixin grid($columns: 1, $gap: $spacing-lg) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin responsive-grid {
+  @include grid(1, $spacing-md);
+  
+  @include tablet {
+    @include grid(2, $spacing-lg);
+  }
+  
+  @include desktop {
+    @include grid(3, $spacing-lg);
+  }
+  
+  @include large-desktop {
+    @include grid(4, $spacing-xl);
+  }
+}
